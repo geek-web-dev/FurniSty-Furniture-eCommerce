@@ -3,9 +3,9 @@ import {
   deleteItemFromTruck,
   getCartItemsQauntity,
 } from "@/app/(customerFacing)/_actions/shoppingTruck";
+import { user } from "@/config";
 import { useAppContext } from "@/context/useAppContext";
-import { useCurrentUser } from "@/hooks/use-current-user";
-import { Delete, X, XSquare } from "lucide-react";
+import { X } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useTransition } from "react";
 import { ClipLoader } from "react-spinners";
@@ -22,7 +22,7 @@ const DeleteProductButton = ({
   productId,
 }: DeleteProductButtonProps) => {
   const [isDeletePending, startDeleteTransition] = useTransition();
-  const { setTruckItems, setTotalQuantity, user } = useAppContext();
+  const { setTruckItems, setTotalQuantity } = useAppContext();
   const router = useRouter();
 
   const quantityHandler = async () => {
@@ -47,11 +47,9 @@ const DeleteProductButton = ({
         <X
           onClick={() =>
             startDeleteTransition(async () => {
-              if (user) {
-                // delete from DB server
-                await deleteItemFromTruck(user.id as string, productId);
-                await quantityHandler(); // important !!
-              }
+              await deleteItemFromTruck(user.id as string, productId);
+              await quantityHandler(); // important !!
+
               router.refresh();
             })
           }

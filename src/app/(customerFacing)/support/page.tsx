@@ -11,8 +11,6 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { useCurrentUser } from "@/hooks/use-current-user";
-import { sendContactEmail } from "@/lib/mail";
 import { contactSchema } from "@/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTransition } from "react";
@@ -21,7 +19,6 @@ import z from "zod";
 
 const ContactPage = () => {
   const [isPending, startTransition] = useTransition();
-  const user = useCurrentUser();
 
   const form = useForm<z.infer<typeof contactSchema>>({
     resolver: zodResolver(contactSchema),
@@ -31,12 +28,7 @@ const ContactPage = () => {
     },
   });
 
-  const submitHandler = (values: z.infer<typeof contactSchema>) => {
-    startTransition(async () => {
-      // await sendContactEmail(user?.email, values.subject);
-    });
-    // console.log("asd");
-  };
+  const submitHandler = (values: z.infer<typeof contactSchema>) => {};
 
   return (
     <>

@@ -27,12 +27,13 @@ import { useAppContext } from "@/context/useAppContext";
 import { formatCurrency } from "@/utils/formatters";
 import Image from "next/image";
 import { Trash2 } from "lucide-react";
+import { user } from "@/config";
 const { pump } = styles;
 
 const ShoppingTruck = () => {
   const fee = 1;
   const [totalPriceInCents, setTotalPriceInCents] = useState<number | null>(0);
-  const { truckItems, setTruckItems, totalQuantity, setTotalQuantity, user } =
+  const { truckItems, setTruckItems, totalQuantity, setTotalQuantity } =
     useAppContext();
 
   const [isDeleteAllPending, startDeleteAll] = useTransition();

@@ -3,7 +3,6 @@ import React, { useEffect, useRef, useState } from "react";
 import NavLink from "./NavLink";
 import { categories, links, pages } from "@/config";
 import { useOnClickOutside } from "@/hooks/use-on-clikc-outside";
-import { Menu } from "lucide-react";
 
 import Link from "next/link";
 import { cn } from "@/lib/utils";

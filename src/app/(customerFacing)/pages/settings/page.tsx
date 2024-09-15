@@ -1,16 +1,12 @@
 "use client";
 import Heading from "@/components/common/Heading";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { Settings, Trash2 } from "lucide-react";
-import { settings } from "../../_actions/settings";
+import { Settings } from "lucide-react";
 import { useState, useTransition } from "react";
-import { signOut, useSession } from "next-auth/react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { settingsSchema } from "@/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
-import FormError from "@/components/form/FormError";
-import FormSuccess from "@/components/form/FormSuccess";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -22,7 +18,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useCurrentUser } from "@/hooks/use-current-user";
 import {
   Select,
   SelectItem,
@@ -31,13 +26,10 @@ import {
   SelectTrigger,
 } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
-import { deleteUserById } from "../../_actions/user";
 import Alert from "@/components/common/Alert";
+import { user } from "@/config";
 
 const SettingsPage = () => {
-  const user = useCurrentUser();
-
-  const { update } = useSession();
   const [error, setError] = useState<string | undefined>();
   const [success, setSuccess] = useState<string | undefined>();
   const [isPending, startTransition] = useTransition();
@@ -54,26 +46,9 @@ const SettingsPage = () => {
     },
   });
 
-  const submitHandler = (values: z.infer<typeof settingsSchema>) => {
-    startTransition(() => {
-      settings(values)
-        .then((data) => {
-          if (data.error) {
-            setError(data.error);
-          }
-          if (data.success) {
-            update();
-            setSuccess(data.success);
-          }
-        })
-        .catch(() => setError("Something went wrong"));
-    });
-  };
+  const submitHandler = (values: z.infer<typeof settingsSchema>) => {};
 
-  const deleteUser = async () => {
-    await signOut();
-    await deleteUserById(user?.id as string);
-  };
+  const action = () => {};
 
   return (
     <>
@@ -86,10 +61,6 @@ const SettingsPage = () => {
           </h3>
         </CardHeader>
         <CardContent>
-          <div className="mb-4">
-            <FormSuccess message={success} />
-            <FormError message={error} />
-          </div>
           <Form {...form}>
             <form
               className="grid sm:grid-cols-2 gap-4 pb-16"
@@ -239,7 +210,7 @@ const SettingsPage = () => {
               </Button>
               <Alert
                 actionName="Delete My Account"
-                action={deleteUser}
+                action={action}
                 des="you will delete your account"
                 className="h-fit mt-8 bg-red-500/75 hover:bg-red-500 text-white rounded-sm py-2"
               />

@@ -9,7 +9,6 @@ import {
   useEffect,
 } from "react";
 import { User } from "@prisma/client";
-import { currentUser } from "@/lib/auth";
 
 type AppContextProps = {
   user: User | null;
@@ -34,13 +33,6 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
   const [wishlistItems, setWishlistItems] = useState<Product[] | null>(null);
 
   const [user, setUser] = useState<User | null>(null);
-  const getUser = async () => {
-    setUser(await currentUser());
-  };
-  useEffect(() => {
-    getUser();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   return (
     <AppContext.Provider

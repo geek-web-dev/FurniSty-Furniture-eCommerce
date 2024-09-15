@@ -1,6 +1,5 @@
 import { notFound } from "next/navigation";
 import Stripe from "stripe";
-import { getProductById } from "../../_actions/product";
 import Image from "next/image";
 import db from "@/db/db";
 import { formatCurrency } from "@/utils/formatters";
@@ -8,11 +7,11 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { getUltimatePrice } from "@/utils/getUltimatePrice";
-import { currentUser } from "@/lib/auth";
 import {
   deleteAllItemsFromTruck,
   deleteItemFromTruck,
 } from "../../_actions/shoppingTruck";
+import { user } from "@/config";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
 
@@ -26,8 +25,6 @@ const PurchaseSuccessPage = async ({
   );
 
   if (paymentIntent.metadata.productId == null) return notFound();
-
-  const user = await currentUser();
 
   if (paymentIntent.metadata.productId === "") {
     await deleteAllItemsFromTruck(user?.id as string);

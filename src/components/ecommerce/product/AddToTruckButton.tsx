@@ -1,10 +1,8 @@
 "use client";
 import { addItemInShoppingTruck } from "@/app/(customerFacing)/_actions/shoppingTruck";
 import { Button } from "@/components/ui/button";
-import { useCurrentUser } from "@/hooks/use-current-user";
 import { cn } from "@/lib/utils";
-import { Truck } from "lucide-react";
-import React, { useTransition } from "react";
+import { useTransition } from "react";
 import { BeatLoader } from "react-spinners";
 import {
   getProductsInTruckByUserId,
@@ -13,8 +11,9 @@ import {
 import { getCartItemsQauntity } from "@/app/(customerFacing)/_actions/shoppingTruck";
 import { useAppContext } from "@/context/useAppContext";
 import { deleteWishlistItem } from "@/app/(customerFacing)/_actions/wishlist";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { user } from "@/config";
 
 type AddToTruckButtonProps = {
   isVertical?: boolean;
@@ -32,15 +31,12 @@ const AddToTruckButton = ({
   priceInCents,
 }: AddToTruckButtonProps) => {
   const [isAddPending, startAddTransition] = useTransition();
-  const { setTruckItems, setTotalQuantity, setWishlistItems, user } =
-    useAppContext();
+  const { setTruckItems, setTotalQuantity, setWishlistItems } = useAppContext();
 
   const router = useRouter();
 
   const quantityHandler = async () => {
-    const prodcutsInTruck = await getProductsInTruckByUserId(
-      user?.id as string
-    );
+    const prodcutsInTruck = await getProductsInTruckByUserId(user.id as string);
     setTruckItems(prodcutsInTruck);
     const getTotalQuantity = await getCartItemsQauntity(user?.id as string);
     if (!getTotalQuantity) return;
@@ -56,25 +52,21 @@ const AddToTruckButton = ({
       disabled={isAddPending || !quantityInStock}
       onClick={() =>
         startAddTransition(async () => {
-          if (user) {
-            // store in DB server
-            await addItemInShoppingTruck(
-              user.id as string,
-              productId,
-              1,
-              priceInCents
+          // store in DB server
+          await addItemInShoppingTruck(
+            user.id as string,
+            productId,
+            1,
+            priceInCents
+          );
+          await quantityHandler();
+          if (isWishlistItem) {
+            await deleteWishlistItem(user.id as string, productId);
+            setWishlistItems(
+              await getProductsInWishlistByUserId(user.id as string)
             );
-            await quantityHandler();
-            if (isWishlistItem) {
-              await deleteWishlistItem(user.id as string, productId);
-              setWishlistItems(
-                await getProductsInWishlistByUserId(user.id as string)
-              );
-            }
-            router.refresh();
-          } else {
-            redirect("/auth/log-in");
           }
+          router.refresh();
         })
       }
     >

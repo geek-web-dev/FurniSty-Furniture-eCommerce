@@ -128,9 +128,7 @@ export const categoryOptions = [
 
 export const accountList = [
   { name: "My Account", href: "/profile" },
-  { name: "Signup", href: "/auth/sign-up" },
-  { name: "Login", href: "/auth/log-in" },
-  { name: "Settings", href: "/auth/settings" },
+  { name: "Settings", href: "/pages/settings" },
   { name: "Cart", href: "/pages/shopping-truck" },
   { name: "Wishlist", href: "/pages/wishlist" },
 ];
@@ -139,7 +137,7 @@ export const quickLinks = [
   { name: "Home", href: "/" },
   { name: "About Us", href: "/about" },
   { name: "Shop", href: "/shop" },
-  { name: "Contact Us", href: "/contact" },
+  { name: "Contact Us", href: "/support" },
   { name: "Help", href: "pages/help" },
   { name: "Admin", href: "/admin" },
 ];
@@ -255,7 +253,7 @@ export const clients = [
     position: "CEO",
   },
   {
-    name: "Jhon Smith",
+    name: "Ahmed Abbs",
     imageSrc: "/customers/client2.jpg",
     rate: 4.5,
     comment:
@@ -263,7 +261,7 @@ export const clients = [
     position: "CEO",
   },
   {
-    name: "Jhon Smith",
+    name: "Ali Salah",
     imageSrc: "/customers/client3.jpg",
     rate: 5,
     comment:
@@ -271,7 +269,7 @@ export const clients = [
     position: "CEO",
   },
   {
-    name: "Jhon Smith",
+    name: "Belal Hammed",
     imageSrc: "/customers/client4.jpg",
     rate: 4,
     comment:
@@ -317,7 +315,24 @@ export const adminQuickLinks = [
 ];
 
 export const adminAccountList = [
-  { name: "My Account", href: "/profile" },
-  { name: "Login", href: "/auth/log-in" },
+  { name: "My Account", href: "" },
+  { name: "Login", href: "" },
 ];
 // =================== Admin =================== //
+
+export const user = {
+  email: "john@example.com",
+  image: "/avatar.png",
+  name: "John Doe",
+  id: "8f391839-67b7-4d6e-8162-a3ae28b9ce8b",
+  role: "Customer",
+  isTwoFactorEnabled: false,
+  isOAuth: false,
+};
+
+export const customer = {
+  email: "john@example.com",
+  image: "/avatar.png",
+  name: "John Doe",
+  id: 1,
+};

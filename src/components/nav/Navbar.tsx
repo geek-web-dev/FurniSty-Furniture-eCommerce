@@ -6,9 +6,7 @@ import NavItems from "./NavItems";
 import SearchDialog from "./SearchDialog";
 import { cn } from "@/lib/utils";
 import VerticalLine from "../common/VerticalLine";
-import { useCurrentUser } from "@/hooks/use-current-user";
-import { signOut } from "next-auth/react";
-import { LogOut, Settings, User2, UserCog2 } from "lucide-react";
+import { LogOut, Settings, UserCog2 } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -20,14 +18,13 @@ import Wishlist from "../ecommerce/wishlist/Wishlist";
 import dynamic from "next/dynamic";
 import ShoppingTruck from "../ecommerce/shoppingTruck/ShoppingTruck";
 import Logo from "./Logo";
-import { useAppContext } from "@/context/useAppContext";
 
 const ThemeButton = dynamic(() => import("../common/ThemeButton"), {
   ssr: false,
 });
 
 const Navbar = () => {
-  const { user } = useAppContext();
+  const user = {};
 
   return (
     <>
@@ -60,11 +57,7 @@ const Navbar = () => {
             ) : null}
 
             {user != null ? (
-              <span
-                className=" text-white/75 hover:text-white duration-100 cursor-pointer"
-                // prevent the singOut action
-                // onClick={() => signOut()}
-              >
+              <span className=" text-white/75 hover:text-white duration-100 cursor-pointer">
                 Sign out
               </span>
             ) : null}
@@ -87,16 +80,12 @@ const Navbar = () => {
                         <div className="w-[36px] h-[36px] flex items-center justify-center relative">
                           <DropdownMenu>
                             <DropdownMenuTrigger>
-                              {user.image ? (
-                                <Image
-                                  src={user.image}
-                                  fill
-                                  alt="user"
-                                  className="absolute rounded-full hover:scale-110 duration-75"
-                                />
-                              ) : (
-                                <User2 className="opacity-50 hover:opacity-100 hover:scale-[1.05] duration-100" />
-                              )}
+                              <Image
+                                src={"/avatar.png"}
+                                fill
+                                alt="user"
+                                className="absolute rounded-full hover:scale-110 duration-75"
+                              />
                             </DropdownMenuTrigger>
                             <DropdownMenuContent className="mt-7 font-semibold bg-white dark:bg-[#222]">
                               <DropdownMenuItem

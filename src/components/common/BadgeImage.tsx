@@ -1,7 +1,6 @@
 import { cn } from "@/lib/utils";
 import { bgMap, colorMap, ColorType } from "@/shared";
 import Image from "next/image";
-import { ReactNode } from "react";
 
 const BadgeImage = ({
   color,

@@ -14,7 +14,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { currentUser } from "@/lib/auth";
 import { cn } from "@/lib/utils";
 import { Edit, MoreVertical } from "lucide-react";
 import Image from "next/image";
@@ -23,14 +22,10 @@ import { dateFormatter } from "@/utils/dateFormatter";
 import { formatCurrency } from "@/utils/formatters";
 import LinkButton from "@/components/common/LinkButton";
 import { DeleteDropdownItem } from "./_components/ProfileActions";
-import { createOrGetCustomer } from "../_actions/customer";
 import LottieHandler from "@/utils/LottieHandler";
+import { customer, user } from "@/config";
 
 const ProfilePage = async () => {
-  const user = await currentUser();
-
-  const customer = await createOrGetCustomer(user?.email as string);
-
   if (user == null) {
     return <LottieHandler type="notFound" message="Not Found 404!" />;
   }

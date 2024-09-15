@@ -4,15 +4,14 @@ import ProductItem, {
   ProductItemSkeleton,
 } from "@/components/ecommerce/product/ProductItem";
 import { getProductsInTruckByUserId } from "../../_actions/product";
-import { currentUser } from "@/lib/auth";
 import Image from "next/image";
 
 import sty from "./styles.module.css";
 import { cn } from "@/lib/utils";
+import { user } from "@/config";
 const { animate } = sty;
 
 const page = async () => {
-  const user = await currentUser();
   const truckItems = await getProductsInTruckByUserId(user?.id as string);
   return (
     <>

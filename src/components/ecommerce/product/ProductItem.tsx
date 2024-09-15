@@ -22,7 +22,7 @@ import { getUltimatePrice } from "@/utils/getUltimatePrice";
 import { useEffect, useState } from "react";
 import { getProductSales } from "@/app/(customerFacing)/_actions/product";
 import StarRating from "../../common/StarRating";
-import { useAppContext } from "@/context/useAppContext";
+import { user } from "@/config";
 
 type ProductItemProps = {
   id: string;
@@ -53,7 +53,6 @@ const ProductItem = ({
   const price = priceInCents / 100;
 
   const [salesCount, setSalesCount] = useState(0);
-  const { user } = useAppContext();
 
   const getSalesCount = async () => {
     setSalesCount((await getProductSales(id)) ?? 0);

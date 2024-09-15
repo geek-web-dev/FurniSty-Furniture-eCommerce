@@ -9,9 +9,8 @@ import {
 import styles from "../../../app/styles.module.css";
 import { cn } from "@/lib/utils";
 import { useAppContext } from "@/context/useAppContext";
-import { useEffect, useState, useTransition } from "react";
+import { useEffect, useTransition } from "react";
 import { getProductsInWishlistByUserId } from "@/app/(customerFacing)/_actions/product";
-import { useCurrentUser } from "@/hooks/use-current-user";
 import GridList from "@/components/common/GridList";
 import ProductItem, { ProductItemSkeleton } from "../product/ProductItem";
 import { Button } from "@/components/ui/button";

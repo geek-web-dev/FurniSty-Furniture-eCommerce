@@ -6,14 +6,13 @@ import {
 } from "@/app/(customerFacing)/_actions/wishlist";
 import { Button } from "@/components/ui/button";
 import { useAppContext } from "@/context/useAppContext";
-import { useCurrentUser } from "@/hooks/use-current-user";
 import { cn } from "@/lib/utils";
-import { Heart } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState, useTransition } from "react";
 import { ClipLoader } from "react-spinners";
 import { FontAwesomeIcon as FAI } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import { user } from "@/config";
 
 type LoveButtonProp = {
   productId: string;
@@ -33,7 +32,7 @@ const LoveButton = ({
 
   const router = useRouter();
 
-  const { setWishlistItems, user } = useAppContext();
+  const { setWishlistItems } = useAppContext();
 
   const loveHandler = async () => {
     const check = await isWishlistItemExist(user?.id as string, productId);
@@ -56,7 +55,7 @@ const LoveButton = ({
         "p-0 h-fit bg-white dark:bg-black z-10",
         isLovePending ? "cursor-not-allowed pointer-events-none" : "",
         isVertical && onImage
-          ? "right-2 top-2 rounded-sm h-7 w-7"
+          ? "right-2 top-2 rounded-sm h-8 w-8"
           : onImage
           ? "right-1 top-1 h-5 w-5 rounded-none"
           : ""
@@ -78,12 +77,11 @@ const LoveButton = ({
         <FAI
           icon={faHeart}
           className={cn(
-            "z-10 p-0.5 cursor-pointer group-hover:scale-95 duration-100",
+            "z-10 p-0.5 cursor-pointer group-hover:scale-95 duration-100 w-4",
             isUserLove
               ? "text-red-500"
               : "text-gray-400 group-hover:text-red-400"
           )}
-          width={24}
         />
       )}
     </Button>

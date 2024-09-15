@@ -4,10 +4,9 @@ import ProductItem, {
   ProductItemSkeleton,
 } from "@/components/ecommerce/product/ProductItem";
 import { getProductsInWishlistByUserId } from "../../_actions/product";
-import { currentUser } from "@/lib/auth";
+import { user } from "@/config";
 
 const page = async () => {
-  const user = await currentUser();
   const truckItems = await getProductsInWishlistByUserId(user?.id as string);
   return (
     <>

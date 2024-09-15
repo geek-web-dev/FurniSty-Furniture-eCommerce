@@ -1,5 +1,5 @@
 "use client";
-import React, { FormEvent, useState } from "react";
+import { FormEvent, useState } from "react";
 import {
   Elements,
   LinkAuthenticationElement,
@@ -23,9 +23,8 @@ import {
   createNewOrder,
   createNewOrderHasOneItem,
 } from "@/app/(customerFacing)/_actions/order";
-import { useCurrentUser } from "@/hooks/use-current-user";
 import Image from "next/image";
-import { useAppContext } from "@/context/useAppContext";
+import { user } from "@/config";
 
 type CheckoutFormProps = {
   pricePaidInCents: number;
@@ -76,8 +75,6 @@ const Form = ({
   const [errorMessage, setErrorMessage] = useState<string>();
   const [email, setEmail] = useState<string>();
   const [open, setOpen] = useState(false);
-
-  const { user } = useAppContext();
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
