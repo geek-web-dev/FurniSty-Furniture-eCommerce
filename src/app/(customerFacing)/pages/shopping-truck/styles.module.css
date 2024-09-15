@@ -1,0 +1,26 @@
+.animate {
+  animation: move 8s linear infinite;
+}
+
+@keyframes move {
+  0% {
+    top: -157px;
+    left: 0;
+    transform: rotate(8deg);
+  }
+  10% {
+    left: 100px;
+    top: -27px;
+    transform: rotate(0deg);
+  }
+  82% {
+    left: 100%;
+    top: -27px;
+    transform: rotate(0deg);
+  }
+  100% {
+    left: 120%;
+    top: 20px;
+    transform: rotate(30deg);
+  }
+}

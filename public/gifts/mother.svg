@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+	 viewBox="0 0 59 59" xml:space="preserve">
+<line style="fill:none;stroke:#F2ECBF;stroke-width:2;stroke-linecap:round;stroke-miterlimit:10;" x1="7" y1="14" x2="7" y2="21"/>
+<path style="fill:#4F423D;" d="M59,34.92c0-0.508-0.442-0.92-0.95-0.92h-5.16C52.382,34,52,34.412,52,34.92V45H26V35
+	c0-0.508-0.492-1-1-1h-5c-0.508,0-1,0.412-1,0.92V45v8h6.97H52h7l0,0v-8V34.92z"/>
+<path style="fill:#695851;" d="M26,35v10h26V34.92c0-0.508,0.382-0.92,0.89-0.92H56V19.623C56,18.727,55.273,18,54.377,18H23.593
+	c-0.897,0-1.623,0.727-1.593,1.623V34h3C25.508,34,26,34.492,26,35z"/>
+<rect x="26" y="39" style="fill:#7C6A66;" width="26" height="6"/>
+<rect x="55" y="53" style="fill:#FBCE9D;" width="4" height="5"/>
+<rect x="19" y="53" style="fill:#FBCE9D;" width="4" height="5"/>
+<path style="fill:#C7CAC7;" d="M10,49c0,4.971-4.029,9-9,9h20c-4.971,0-9-4.029-9-9H10z"/>
+<line style="fill:none;stroke:#C7CAC7;stroke-width:2;stroke-linecap:round;stroke-miterlimit:10;" x1="11" y1="49" x2="11" y2="14"/>
+<rect x="1" style="fill:#EFCE4A;" width="20" height="14"/>
+<polyline style="fill:none;stroke:#949493;stroke-width:2;stroke-linecap:round;stroke-miterlimit:10;" points="21,58 20,58 2,58 
+	1,58 "/>
+</svg>
