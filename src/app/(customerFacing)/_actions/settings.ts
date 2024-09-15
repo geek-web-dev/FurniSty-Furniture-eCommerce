@@ -18,12 +18,12 @@ export const settings = async (values: z.infer<typeof settingsSchema>) => {
   if (!dbUser) return { error: "unauthorized or network error" };
 
   // with provider
-  if (user.isOAuth) {
-    values.email = undefined;
-    values.password = undefined;
-    values.newPassword = undefined;
-    values.isTwoFactorEnabled = undefined;
-  }
+  // if (user.isOAuth) {
+  //   values.email = undefined;
+  //   values.password = undefined;
+  //   values.newPassword = undefined;
+  //   values.isTwoFactorEnabled = undefined;
+  // }
 
   if (values.email && values.email !== user.email) {
     const existingUser = await getUserByEmail(values.email);

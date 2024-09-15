@@ -3,7 +3,6 @@ import { PrismaAdapter } from "@auth/prisma-adapter";
 import authConfig from "./auth.config";
 import db from "@/db/db";
 import { getUserById } from "@/utils/getUser";
-import { UserRole } from "@prisma/client";
 import { getTwoFactorConfirmationByUserId } from "@/utils/twoFactorConfirmation";
 import { getAccountByUserId } from "@/app/_actions/account";
 
@@ -54,7 +53,7 @@ export const {
       }
 
       if (token.role && session.user) {
-        session.user.role = token.role as UserRole;
+        session.user.role = token.role;
       }
 
       if (session.user) {

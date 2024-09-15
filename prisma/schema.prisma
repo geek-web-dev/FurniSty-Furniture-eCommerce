@@ -10,154 +10,151 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Visitor {
-  id      Int      @id @default(autoincrement())
-  count   Int
-}
-
 model Account {
-  id                 String  @id @default(cuid())
-  userId             String
-  type               String
-  provider           String
-  providerAccountId  String
-  refresh_token      String?
-  access_token       String?
-  expires_at         Int?
-  token_type         String?
-  scope              String?
-  id_token           String?
-  session_state      String?
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
 }
 
 // User model
 model User {
-  id            String      @id @default(uuid())
-  name          String?
-  email         String?     @unique
-  emailVerified DateTime?
-  password      String?
-  image         String?
-  role          String @default("USER")
-  isTwoFactorEnabled  Boolean @default(false)
-  
-  cartItems      CartItem[]
-  wishlistItems  WishlistItem[]
-  accounts      Account[]
+  id                 String    @id @default(uuid())
+  name               String?
+  email              String?   @unique
+  emailVerified      DateTime?
+  password           String?
+  image              String?
+  role               String    @default("USER")
+  isTwoFactorEnabled Boolean   @default(false)
+
+  cartItems             CartItem[]
+  wishlistItems         WishlistItem[]
+  accounts              Account[]
   twoFactorConfirmation TwoFactorConfirmation?
-  customer   Customer?
+  customer              Customer?
 }
 
 model Customer {
-  id         Int      @id @default(autoincrement())
-  userEmail      String 
-  user       User     @relation(fields: [userEmail], references: [email], onDelete: Cascade)
-  orders     Order[]
-  createdAt DateTime  @default(now())
+  id        Int      @id @default(autoincrement())
+  userEmail String
+  user      User     @relation(fields: [userEmail], references: [email], onDelete: Cascade)
+  orders    Order[]
+  createdAt DateTime @default(now())
+
   @@unique([userEmail])
 }
 
 model TwoFactorConfirmation {
-  id String @id @default(cuid())
+  id     String @id @default(cuid())
   userId String @unique
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 // verification Token and we dont want to relation it by user
 model VerificationToken {
-  id String @id @default(cuid())
-  email String
-  token String
+  id      String   @id @default(cuid())
+  email   String
+  token   String
   expires DateTime
+
   @@unique([email, token])
 }
 
 model PaswordResetToken {
-  id String @id @default(cuid())
-  email String
-  token String
+  id      String   @id @default(cuid())
+  email   String
+  token   String
   expires DateTime
+
   @@unique([email, token])
 }
 
 model TwoFactorToken {
-  id String @id @default(cuid())
-  email String
-  token String
+  id      String   @id @default(cuid())
+  email   String
+  token   String
   expires DateTime
+
   @@unique([email, token])
 }
 
-
-
 // Product model
 model Product {
-  id                      String             @id @default(uuid())
-  name                    String
-  offer                   Int
-  priceInCents            Int
-  ultimatePriceInCents    Int                @default(1)
-  imagePath               String
-  description             String
-  isAvailableForPurchase  Boolean            @default(true)
-  createdAt               DateTime           @default(now())
-  updatedAt               DateTime           @updatedAt
-  category                String
-  quantityInStock         Int                @default(1)
-  rate                    Float              @default(0)
+  id                     String         @id @default(uuid())
+  name                   String
+  offer                  Int
+  priceInCents           Int
+  ultimatePriceInCents   Int            @default(1)
+  imagePath              String
+  description            String
+  isAvailableForPurchase Boolean        @default(true)
+  createdAt              DateTime       @default(now())
+  updatedAt              DateTime       @updatedAt
+  category               String
+  quantityInStock        Int            @default(1)
+  rate                   Float          @default(0)
   // Relations
-  wishlistItems WishlistItem[]
-  cartItems     CartItem[]
-  orderItems OrderItem[]
+  wishlistItems          WishlistItem[]
+  cartItems              CartItem[]
+  orderItems             OrderItem[]
 }
 
 // Order
 model Order {
-  id           Int      @id @default(autoincrement())
-  customerId    Int
+  id               Int         @id @default(autoincrement())
+  customerId       Int
   pricePaidInCents Int
-  isDone           Boolean @default(false)
-  createdAt    DateTime    @default(now())
-  updatedAt    DateTime    @updatedAt
+  isDone           Boolean     @default(false)
+  createdAt        DateTime    @default(now())
+  updatedAt        DateTime    @updatedAt
   // Relations
-  customer      Customer     @relation(fields: [customerId], references: [id], onDelete: Cascade)
-  orderItems   OrderItem[]
+  customer         Customer    @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  orderItems       OrderItem[]
 }
 
 // OrderItem
 model OrderItem {
-  id Int @id @default(autoincrement())
-  orderId Int
+  id        Int     @id @default(autoincrement())
+  orderId   Int
   productId String
   quantity  Int
   // Relations
-  order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
-  product Product @relation(fields: [productId], references: [id], onDelete: Restrict)
+  order     Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product   Product @relation(fields: [productId], references: [id], onDelete: Restrict)
 }
 
 // WishlistItem model
 model WishlistItem {
-  id          Int      @id @default(autoincrement())
-  userId      String
-  productId   String
-  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  product     Product   @relation(fields: [productId], references: [id], onDelete: Cascade)
+  id        Int     @id @default(autoincrement())
+  userId    String
+  productId String
+  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
   @@unique([userId, productId])
 }
 
 // CartItem model
 model CartItem {
-  id         Int      @id @default(autoincrement())
-  quantity   Int      @default(0)
+  id           Int     @id @default(autoincrement())
+  quantity     Int     @default(0)
   priceInCents Int
-  userId     String
-  productId  String
-  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  product    Product  @relation(fields: [productId], references: [id], onDelete: Restrict)
+  userId       String
+  productId    String
+  user         User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  product      Product @relation(fields: [productId], references: [id], onDelete: Restrict)
+
   @@unique([userId, productId])
 }
-
-
