@@ -2,15 +2,11 @@ import { getProductById } from "@/app/(customerFacing)/_actions/product";
 import AddToTruckButton from "@/components/ecommerce/product/AddToTruckButton";
 import LoveButton from "@/components/ecommerce/product/LoveButton";
 import StarRating from "@/components/common/StarRating";
-import CheckoutForm from "@/components/form/CheckoutForm";
 import { formatCurrency } from "@/utils/formatters";
 import LottieHandler from "@/utils/LottieHandler";
 import Image from "next/image";
 
-import Stripe from "stripe";
 import { cn } from "@/lib/utils";
-
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
 
 const page = async ({
   params: { productId },
@@ -29,16 +25,6 @@ const page = async ({
   }
 
   const offer = product.offer;
-
-  const paymentIntent = await stripe.paymentIntents.create({
-    amount: product.priceInCents,
-    currency: "USD",
-    metadata: { productId: product.id },
-  });
-
-  if (paymentIntent.client_secret == null) {
-    throw new Error("Stripe failed");
-  }
 
   return (
     <>
@@ -136,13 +122,7 @@ const page = async ({
           </h3>
           <p className="my-4">{product.description}</p>
           {/* Stripe */}
-          {product.quantityInStock ? (
-            <CheckoutForm
-              pricePaidInCents={product.ultimatePriceInCents}
-              productId={product.id}
-              clientSecret={paymentIntent.client_secret}
-            />
-          ) : null}
+          {product.quantityInStock ? <></> : null}
         </div>
       </div>
     </>

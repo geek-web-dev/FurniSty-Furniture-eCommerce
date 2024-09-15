@@ -52,7 +52,7 @@ const LoveButton = ({
       className={cn(
         className,
         onImage ? "absolute group" : "",
-        "p-0 h-fit bg-white dark:bg-black z-10",
+        "p-0 h-8 w-8 bg-white dark:bg-black z-10",
         isLovePending ? "cursor-not-allowed pointer-events-none" : "",
         isVertical && onImage
           ? "right-2 top-2 rounded-sm h-8 w-8"
@@ -72,7 +72,7 @@ const LoveButton = ({
       }}
     >
       {isLovePending ? (
-        <ClipLoader size={14} color="red" className="z-10" />
+        <ClipLoader size={16} color="red" className="z-10" />
       ) : (
         <FAI
           icon={faHeart}

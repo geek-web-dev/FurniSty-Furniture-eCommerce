@@ -154,7 +154,7 @@ const ShoppingTruck = () => {
                   className="bg-[--btn-color-2] hover:bg-[--btn-hover-color-2]"
                 >
                   <Button className="w-full" asChild>
-                    <Link href="/checkout" className="!text-white">
+                    <Link href="" className="!text-white">
                       Continue to Checkout
                     </Link>
                   </Button>
