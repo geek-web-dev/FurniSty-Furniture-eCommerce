@@ -3,6 +3,7 @@ import { Inter, Tajawal } from "next/font/google";
 import "./globals.css";
 import { AppContextProvider } from "@/context/useAppContext";
 import { cn } from "@/lib/utils";
+import { Analytics } from "@vercel/analytics/react";
 
 // const font = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -25,6 +26,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={cn(font.className, "relative h-full")}>
         <AppContextProvider>{children}</AppContextProvider>
+        <Analytics />
       </body>
     </html>
   );
